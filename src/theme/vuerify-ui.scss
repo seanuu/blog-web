@@ -1,0 +1,17 @@
+.v-icon {
+  font-size: inherit;
+  color: inherit !important;
+}
+
+.application {
+  font-family: inherit;
+}
+
+.theme--light.application {
+  color: inherit;
+}
+
+.v-list--dense .v-list__tile:not(.v-list__tile--avatar) {
+  height: 30px;
+  font-size: 14px;
+}

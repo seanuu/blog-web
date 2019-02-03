@@ -1,12 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import './polyfills';
+import './plugins';
+import './styles.scss';
 
-Vue.config.productionTip = false
+import Vue from 'vue';
+import App from './App.vue';
+import router from './app/router/router';
+import store from './app/store/store';
+import * as $api from './app/api';
+
+Vue.prototype.$api = $api;
+Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app');
