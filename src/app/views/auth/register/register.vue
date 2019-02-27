@@ -88,7 +88,7 @@
     };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .register {
         position: absolute;
         align-self: center;

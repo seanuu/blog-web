@@ -34,11 +34,6 @@
                 classificationOptions: [],
             };
         },
-        watch: {
-            $route: function () {
-                this.queryArticle();
-            }
-        },
         methods: {
             save: function () {
                 this.article.content = this.editor.getContent();
@@ -65,22 +60,30 @@
                     }
 
                     this.article = data;
-                    this.editor.setContent(this.article.content);
+                    setTimeout(() => {
+                        this.editor.setContent(data.content);
+                    });
+
                 });
             },
             initEditor: function () {
-                const config = Object.assign(TinymceConfig, {
-                    target: this.$refs.editor,
-                    setup: editor => {
-                        this.editor = editor;
-                    }
+                return new Promise(resolve => {
+                    const config = Object.assign(TinymceConfig, {
+                        target: this.$refs.editor,
+                        setup: editor => {
+                            this.editor = editor;
+                        }
+                    });
+                    tinymce.init(config);
+
+                    resolve();
                 });
-                tinymce.init(config);
             },
             clearAll: function () {
                 this.article.title = '';
                 this.article.classification = '';
                 this.article.content = '';
+                this.editor.setContent(this.article.content);
             },
             queryClassification: function () {
                 this.$api.Article.queryClassification().then(data => {
@@ -88,12 +91,18 @@
                 });
             }
         },
+        watch: {
+            $route: function () {
+                this.queryArticle();
+            }
+        },
         created: function () {
             this.queryClassification();
         },
         mounted: function () {
-            this.initEditor();
-            this.queryArticle();
+            this.initEditor().then(() => {
+                this.queryArticle();
+            });
         }
     };
 </script>
@@ -106,6 +115,9 @@
             display: flex;
             &-classify {
                 width: 240px;
+                @media screen and (max-width: 600px) {
+                    width: 50%;
+                }
                 margin-left: 8px;
                 flex: none;
             }

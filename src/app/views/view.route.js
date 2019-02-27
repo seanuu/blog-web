@@ -12,16 +12,23 @@ export default [
             {
                 path: '',
                 name: 'blog',
-                component: UsersAbstract
+                component: UsersAbstract,
+                meta: {
+                    title: '博客'
+                }
             },
             {
                 path: 'author/:userId',
                 component: AuthorBlog,
+
                 children: [
                     {
                         path: '',
                         name: 'author',
-                        component: AuthorAbstract
+                        component: AuthorAbstract,
+                        meta: {
+                            title: '主页'
+                        },
                     },
                     {
                         path: 'article',

@@ -1,5 +1,5 @@
 <template>
-    <div class="author-abstract-item">
+    <div class="author-abstract-item" @click="goArticle">
 
         <div class="item-info">
             <span class="item-info-author">{{item.author}}</span>
@@ -8,7 +8,7 @@
             <span>{{item.classification}}</span>
         </div>
 
-        <div class="item-title" @click="goArticle">{{item.title}}</div>
+        <div class="item-title">{{item.title}}</div>
 
         <div class="item-content">
             <v-layout>
@@ -86,6 +86,7 @@
 
         .item-content {
             position: relative;
+            cursor: default;
             &-text {
                 padding: 0 1rem 0 0;
                 word-break: break-all;

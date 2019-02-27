@@ -29,7 +29,6 @@
                         this.$router.push({name: 'blog'});
                     }
                     this.abstractList = data;
-                    console.log(this.abstractList);
                 });
             }
         },

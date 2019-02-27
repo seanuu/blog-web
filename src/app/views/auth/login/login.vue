@@ -63,7 +63,7 @@
     };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .login {
         position: absolute;
         align-self: center;

@@ -1,7 +1,7 @@
 <template>
     <div class="article-info">
         <!--<div class="article-info-avatar" :style="{'background-image': `url(${article.avatar})`}"></div>-->
-        <v-avatar size="52">
+        <v-avatar size="52" style="cursor: pointer" @click="goAuthorPage(article.userId)">
             <img :src="article.avatar">
         </v-avatar>
 
@@ -12,7 +12,7 @@
                     <span slot="activator" class="info-detail-date">{{createTime}}</span>
                     <span>最后编辑于{{lastEditTime}}</span>
                 </v-tooltip>
-                <v-icon class="mr-1 ml-3">fas fa-tags</v-icon>
+                <v-icon class="mr-1 ml-3" color="grey darken-3">fas fa-tags</v-icon>
                 <span>{{article.classification}}</span>
             </div>
         </div>
@@ -46,7 +46,7 @@
     };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .article-info {
         display: flex;
         align-content: center;
@@ -63,7 +63,7 @@
             display: flex;
             flex-direction: column;
             vertical-align: middle;
-            margin-left: .75rem;
+            margin-left: 1.25rem;
             .info-name {
                 font-size: 1rem;
                 line-height: 1.7rem;

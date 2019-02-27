@@ -20,7 +20,7 @@ module.exports = {
         'semi': ['error', 'always'],
         'quotes': ['error', 'single'],
         'no-unused-vars': 'off',
-        'vue/no-unused-components': 'off'
+        'no-unused-components': 'off'
     },
     parserOptions: {
         parser: 'babel-eslint'

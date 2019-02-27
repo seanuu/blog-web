@@ -49,5 +49,9 @@ export default function (Router) {
         } else {
             next();
         }
+
+        if (to.meta.title) {
+            document.title = to.meta.title;
+        }
     });
 }

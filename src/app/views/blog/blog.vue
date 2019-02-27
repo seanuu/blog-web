@@ -63,6 +63,9 @@
             hasSignIn: function () {
                 return this.$store.state.login;
             },
+            username: function () {
+                return this.$store.state.username;
+            }
         },
         methods: {
             goBlog: function () {
@@ -87,7 +90,7 @@
                 this.$api.Auth.logout().then(data => {
                     if (!data) return;
                     this.$store.commit('signOut');
-                    // this.goBlog();
+
                     window.location.reload();
                 });
             },
@@ -95,8 +98,13 @@
 
             }
         },
+        watch: {
+            username: function (value) {
+                this.menu[0].title = value;
+            }
+        },
         created: function () {
-            this.menu[0].title = this.$store.state.username;
+            this.menu[0].title = this.username;
         }
     };
 </script>
@@ -104,12 +112,13 @@
 <style lang="scss">
     .blog {
         position: relative;
-        display: flex;
-        flex-direction: column;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        /*overflow: hidden;*/
         &-toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
             z-index: 9;
             &-content {
                 position: relative;
@@ -127,7 +136,9 @@
             }
         }
         &-content {
-            flex: 1;
+            position: relative;
+            top: 55px;
+            height: calc(100% - 55px);
             overflow: auto;
         }
     }

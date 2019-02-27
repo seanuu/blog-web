@@ -1,5 +1,5 @@
 <template>
-    <div class="article-catalog" v-scroll:#blog_content="onScroll" :style="{top: `${top || 0}px`}">
+    <div class="article-catalog">
         <template v-for="(item, i) in catalog.children">
             <catalog-item :item="item" :key="i" :index="i" :parent="catalog"></catalog-item>
         </template>
@@ -28,9 +28,9 @@
 
 <style lang="scss">
     .article-catalog {
-        position: relative;
+        position: fixed;
         width: 190px;
-        height: 80vh;
+        max-height: 80vh;
         overflow: auto;
         font-size: 14px;
         cursor: default;
