@@ -102,6 +102,8 @@
                 if (event.target.scrollTop > this.headOffsetTop) {
                     $(head).css('position', 'relative').css('top', `${event.target.scrollTop - this.headOffsetTop}px`);
                     console.log(event.target.scrollTop - this.headOffsetTop)
+                } else {
+                    $(head).css('position', 'relative').css('top', '0px');
                 }
 
             },

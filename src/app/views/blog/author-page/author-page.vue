@@ -51,11 +51,11 @@
         &-catalog {
             position: relative;
             width: 240px;
+            min-width: 240px;
         }
         &-content {
             position: relative;
-            flex: 1;
-            width: 100%;
+            width: calc(100% - 240px);
             /*overflow: hidden;*/
             /*padding: 0 1rem;*/
             /*padding-right: 240px;*/

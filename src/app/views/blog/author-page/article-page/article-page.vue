@@ -112,12 +112,15 @@
 
 <style lang="scss">
     .page-wrap {
+        position: relative;
+        width: 100%;
         display: flex;
     }
 
     .article-page-nav {
         position: relative;
         width: 240px;
+        min-width: 240px;
         .page-nav {
             position: fixed;
             width: 190px;
@@ -147,7 +150,7 @@
     .article-page {
         position: relative;
         flex: 1;
-        width: 100%;
+        max-width: calc(100% - 240px);
         &-title {
             word-break: break-all;
             font-size: 2rem;
