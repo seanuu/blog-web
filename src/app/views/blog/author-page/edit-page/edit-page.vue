@@ -1,5 +1,5 @@
 <template>
-    <div class="content-edit" ref="container">
+    <div class="content-edit" ref="container"  v-scroll:#blog_content="onScroll">
         <v-form class="content-edit-form" ref="form">
             <v-text-field label="文章标题"
                           v-model="article.title"></v-text-field>
@@ -30,6 +30,8 @@
                     classification: '',
                     content: ''
                 },
+
+                headOffsetTop: null,
 
                 classificationOptions: [],
             };
@@ -89,6 +91,28 @@
                 this.$api.Article.queryClassification().then(data => {
                     this.classificationOptions = data;
                 });
+            },
+            onScroll:function (event) {
+                let head = $('.mce-top-part')[0];
+                let target = event.target;
+                if (!this.headOffsetTop) {
+                    this.headOffsetTop = this.edgeTop(head, target);
+                }
+
+                if (event.target.scrollTop > this.headOffsetTop) {
+                    $(head).css('position', 'relative').css('top', `${event.target.scrollTop - this.headOffsetTop}px`);
+                    console.log(event.target.scrollTop - this.headOffsetTop)
+                }
+
+            },
+            edgeTop: function(el, target) {
+                let offsetTop = el.offsetTop;
+                let offsetParent = el.offsetParent;
+                while (offsetParent && offsetParent !== target) {
+                    offsetTop += offsetParent.offsetTop;
+                    offsetParent = offsetParent.offsetParent;
+                }
+                return offsetTop;
             }
         },
         watch: {
@@ -135,6 +159,9 @@
         }
         .mce-panel {
             border: none;
+        }
+        .mce-top-part {
+            background: white;
         }
     }
 </style>

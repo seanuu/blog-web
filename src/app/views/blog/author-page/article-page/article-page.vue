@@ -127,6 +127,7 @@
             font-size: 14px;
             cursor: default;
             &-item {
+                @include text-ellipsis;
                 &:hover {
                     color: $color-primary;
                 }

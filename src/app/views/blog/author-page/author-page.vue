@@ -4,7 +4,7 @@
             <article-catalog :catalog="catalog"></article-catalog>
         </div>
 
-        <div class="author-page-content">
+        <div class="author-page-content pb-5">
             <router-view></router-view>
         </div>
     </div>

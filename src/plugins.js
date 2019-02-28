@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Common from './common';
 import Vuetify from 'vuetify';
-import 'vuetify/dist/vuetify.min.css';
+import './assets/vuetify.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 Vue.use(Vuetify, {
