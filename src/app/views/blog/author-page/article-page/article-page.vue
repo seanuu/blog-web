@@ -150,7 +150,8 @@
     .article-page {
         position: relative;
         flex: 1;
-        max-width: calc(100% - 240px);
+        overflow: hidden;
+        /*max-width: calc(100% - 240px);*/
         &-title {
             word-break: break-all;
             font-size: 2rem;

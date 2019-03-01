@@ -55,10 +55,8 @@
         }
         &-content {
             position: relative;
-            width: calc(100% - 240px);
-            /*overflow: hidden;*/
-            /*padding: 0 1rem;*/
-            /*padding-right: 240px;*/
+            flex: 1;
+            overflow: hidden;
         }
     }
 </style>
