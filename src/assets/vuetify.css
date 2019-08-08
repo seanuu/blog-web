@@ -2756,8 +2756,8 @@ code:after,
 kbd:after,
 code:before,
 kbd:before {
-  content: "\A0";
-  letter-spacing: -1px;
+  /*content: "\A0";*/
+  /*letter-spacing: -1px;*/
 }
 code {
   background-color: #f5f5f5;

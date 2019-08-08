@@ -28,11 +28,14 @@
                 let userId = this.$route.params.userId;
                 this.$api.Article.queryArticleCatalog(userId).then(data => {
                     this.catalog.children = data;
+
                     this.catalog.children.forEach(item => {
                         item.classify = true;
                     });
+
+                    Utils.sort(this.catalog, (a, b) => a._id.localeCompare ? a._id.localeCompare(b._id) : a - b);
                 });
-            }
+            },
         },
         created: function () {
             this.updateCatalog();

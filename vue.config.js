@@ -26,7 +26,7 @@ module.exports = {
         }
     },
     devServer: {
-        proxy: 'http://localhost'
+        proxy: 'http://112.74.41.115'
     },
     configureWebpack: {
         resolve: {

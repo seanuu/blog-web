@@ -3,7 +3,7 @@
 
         <div class="item-info">
             <span class="item-info-author">{{item.author}}</span>
-            <span style="margin-right: 1rem;">{{createTime}}</span>
+            <!--<span style="margin-right: 1rem;">{{createTime}}</span>-->
             <v-icon>fas fa-tags</v-icon>
             <span>{{item.classification}}</span>
         </div>
@@ -101,6 +101,7 @@
                 border-radius: .25rem;
                 background-position: center;
                 background-size: contain;
+                background-repeat: no-repeat;
             }
         }
     }

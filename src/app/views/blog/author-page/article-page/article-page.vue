@@ -126,11 +126,12 @@
             width: 190px;
             max-height: 80vh;
             margin-left: 30px;
-            overflow: auto;
+            overflow: visible;
             font-size: 14px;
             cursor: default;
             &-item {
-                @include text-ellipsis;
+                white-space: nowrap;
+                overflow: visible;
                 &:hover {
                     color: $color-primary;
                 }

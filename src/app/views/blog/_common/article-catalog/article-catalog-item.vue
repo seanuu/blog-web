@@ -7,6 +7,8 @@
                 <span class="catalog-item-title">{{item._id}}</span>
                 <v-icon class="catalog-item-icon" v-if="item.children && !item.expand">fas fa-caret-right fa-fw</v-icon>
                 <v-icon class="catalog-item-icon" v-if="item.children && item.expand">fas fa-caret-down fa-fw</v-icon>
+
+                <span v-if="item.classify" style="float: right; position: relative; top: 5px;">{{item.children.length}}</span>
             </div>
             <span>{{item._id}}</span>
         </v-tooltip>
@@ -58,10 +60,11 @@
         flex-direction: column;
         width: 100%;
         &-wrap {
-            display: flex;
+            display: block;
             padding: 0.5rem 0.25rem 0.5rem 0.75rem;
             cursor: pointer;
             transition: background 300ms;
+            @include text-ellipsis();
             &.active {
                 background: $color-primary;
                 color: #FFFFFF;
@@ -88,8 +91,11 @@
             flex: 1;
         }
         &-icon {
+            position: relative;
+            top: 5px;
             font-size: .75rem;
             color: #464646 !important;
+            float: right;
         }
         &-list {
             background-color: #F5F5F5;

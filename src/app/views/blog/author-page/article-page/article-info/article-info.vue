@@ -9,8 +9,9 @@
             <div class="info-name" @click="goAuthorPage(article.userId)">{{article.author}}</div>
             <div class="info-detail">
                 <v-tooltip right>
-                    <span slot="activator" class="info-detail-date">{{createTime}}</span>
-                    <span>最后编辑于{{lastEditTime}}</span>
+                    <span slot="activator">......</span>
+                    <!--<span slot="activator" class="info-detail-date">{{createTime}}</span>-->
+                    <!--<span>最后编辑于{{lastEditTime}}</span>-->
                 </v-tooltip>
                 <v-icon class="mr-1 ml-3" color="grey darken-3">fas fa-tags</v-icon>
                 <span>{{article.classification}}</span>

@@ -140,6 +140,7 @@
             top: 55px;
             height: calc(100% - 55px);
             overflow: auto;
+            margin-right: -5px;
         }
     }
 </style>
