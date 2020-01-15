@@ -18,7 +18,7 @@
                         <v-card-title class="title">
                             <span class="abstract-list-item-title">{{item.title}}</span>
                         </v-card-title>
-                        <v-card-text class="hidden-xs-only">{{item.content}}</v-card-text>
+                        <v-card-text class="hidden-xs-only">{{item.abstract}}</v-card-text>
                     </v-card>
                 </v-hover>
             </v-timeline-item>
@@ -37,7 +37,7 @@
                     <v-flex>
                         <strong>{{item.title}}</strong>
                         <div class="caption" style=" word-break:break-all;">
-                            {{item.content}}
+                            {{item.abstract}}
                         </div>
                     </v-flex>
                 </v-layout>

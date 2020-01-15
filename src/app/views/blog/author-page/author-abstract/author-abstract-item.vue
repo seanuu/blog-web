@@ -13,7 +13,7 @@
         <div class="item-content">
             <v-layout>
                 <v-flex :xs8="!!item.img">
-                    <span class="item-content-text">{{item.content}}</span>
+                    <span class="item-content-text">{{item.abstract}}</span>
                 </v-flex>
                 <v-flex v-if="item.img" xs4 style="padding-left: 8px;">
                     <div class="item-content-img" :style="{'background-image': `url(${item.img})`}"></div>
