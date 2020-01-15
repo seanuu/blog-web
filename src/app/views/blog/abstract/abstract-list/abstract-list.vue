@@ -8,7 +8,7 @@
                     <img :src="item.avatar">
                 </v-avatar>
                 <div slot="opposite">
-                    <!--<div>{{formatTime(item.createdAt)}}</div>-->
+                    <div>{{formatTime(item.createdAt)}}</div>
                     <div>{{item.author}}</div>
                 </div>
                 <v-hover>
@@ -32,10 +32,7 @@
                 </v-avatar>
 
                 <v-layout pt-2 pb-1 @click="goArticlePage(item)">
-                    <v-flex xs3 pr-2>
-                        <!--<span>{{formatData(item.createdAt)}}</span>-->
-                        <span>......</span>
-                    </v-flex>
+                    <span class="pr-2">{{formatData(item.createdAt)}}</span>
 
                     <v-flex>
                         <strong>{{item.title}}</strong>
@@ -58,7 +55,7 @@
         data: function () {
             return {
                 format: timeFormat('%Y.%m.%d %H:%M'),
-                formatDate: timeFormat('%y.%m.%d'),
+                formatDate: timeFormat('%Y.%m.%d'),
             };
         },
         methods: {

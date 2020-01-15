@@ -16,6 +16,10 @@ export default {
     toolbar: `formatselect | bold italic strikethrough forecolor backcolor | link image | 
     alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat`,
 
+    image_uploadtab: true,
+    images_upload_url: '/resource',
+    // images_upload_base_path: '',
+
     codesample_languages: [
         {text: 'JavaScript', value: 'javascript'},
         {text: 'Java', value: 'java'},
