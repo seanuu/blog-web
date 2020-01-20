@@ -139,7 +139,8 @@
             position: relative;
             top: 55px;
             height: calc(100% - 55px);
-            overflow: auto;
+            overflow-y: scroll;
+            overflow-x: auto;
             margin-right: -5px;
         }
     }

@@ -79,24 +79,36 @@
                         $('pre').addClass('line-numbers');
                         Prism.highlightAll();
 
-                        this.setArticleNav();
+                        setTimeout(() => {
+                            this.setArticleNav();
+                        }, 100);
                     });
                 });
             },
             setArticleNav: function () {
                 let children = $(this.$refs.content).children('h1, h2, h3, h4, h5, h6');
+                let content = document.getElementById('blog_content');
                 this.articleNav = [];
                 children.each((index, element) => {
                     let tagLevel = (/(?<=h)[0-9]/i.exec(element.tagName)) || [];
-                    this.articleNav.push({text: $(element).text(), offsetTop: element.offsetTop, level: tagLevel[0]});
+                    this.articleNav.push({text: $(element).text(), offsetTop: this.edgeTop(element, content), level: tagLevel[0]});
                 });
             },
             setScrollTop: function (item) {
                 let content = $('#blog_content');
-                content.animate({scrollTop: `${item.offsetTop + 10}px`});
+                content.animate({scrollTop: `${item.offsetTop}px`});
             },
             onScroll: function (event) {
                 this.top = event.target.scrollTop;
+            },
+            edgeTop(el, bounding) {
+                let offsetTop = el.offsetTop;
+                let offsetParent = el.offsetParent;
+                while (offsetParent && (offsetParent !== bounding)) {
+                    offsetTop += offsetParent.offsetTop;
+                    offsetParent = offsetParent.offsetParent;
+                }
+                return offsetTop;
             }
         },
         watch: {
