@@ -1,2 +1,2 @@
 export * from './rx-tools';
-export * from './sort'
+export * from './sort';

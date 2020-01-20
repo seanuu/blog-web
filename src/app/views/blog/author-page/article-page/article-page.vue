@@ -31,172 +31,176 @@
 </template>
 
 <script>
-    import ArticleInfo from './article-info/article-info.vue';
+import ArticleInfo from './article-info/article-info.vue';
 
-    export default {
-        name: 'article-page',
-        components: {ArticleInfo},
-        data: function () {
-            return {
-                article: {},
-                top: 0,
-                articleNav: []
-            };
+export default {
+    name: 'article-page',
+    components: {ArticleInfo},
+    data: function () {
+        return {
+            article: {},
+            top: 0,
+            articleNav: [],
+        };
+    },
+    computed: {
+        hidden: function () {
+            return this.top > 200;
+        }
+    },
+    methods: {
+        goEdit: function () {
+            this.$router.push({name: 'edit', query: {id: this.$route.query.id}});
         },
-        computed: {
-            hidden: function () {
-                return this.top > 200;
-            }
-        },
-        methods: {
-            goEdit: function () {
-                this.$router.push({name: 'edit', query: {id: this.$route.query.id}});
-            },
-            deleteArticle: function () {
-                this.$prompt.send({title: '警告', message: `确认删除 ${this.article.title}！`}).then(data => {
+        deleteArticle: function () {
+            this.$prompt.send({title: '警告', message: `确认删除 ${this.article.title}！`}).then(data => {
+                if (!data) return;
+
+                this.$api.Article.deleteArticle(this.article._id).then(data => {
                     if (!data) return;
-
-                    this.$api.Article.deleteArticle(this.article._id).then(data => {
-                        if (!data) return;
-                        this.$parent.updateCatalog();
-                        this.$router.push({name: 'author', params: {userId: this.$store.state.userId}});
-                    });
+                    this.$parent.updateCatalog();
+                    this.$router.push({name: 'author', params: {userId: this.$store.state.userId}});
                 });
-            },
-            queryArticle: function () {
-                let id = this.$route.query.id || null;
-                this.$api.Article.queryArticle(id).then(data => {
-                    if (!data) {
-                        this.$message({message: '文章不存在!'});
-                        this.$router.push({name: 'blog'});
-                        return;
-                    }
-
-                    document.title = data.title;
-
-                    this.article = data;
-                    this.$nextTick(function () {
-                        $('pre').addClass('line-numbers');
-                        Prism.highlightAll();
-
-                        setTimeout(() => {
-                            this.setArticleNav();
-                        }, 100);
-                    });
-                });
-            },
-            setArticleNav: function () {
-                let children = $(this.$refs.content).children('h1, h2, h3, h4, h5, h6');
-                let content = document.getElementById('blog_content');
-                this.articleNav = [];
-                children.each((index, element) => {
-                    let tagLevel = (/(?<=h)[0-9]/i.exec(element.tagName)) || [];
-                    this.articleNav.push({text: $(element).text(), offsetTop: this.edgeTop(element, content), level: tagLevel[0]});
-                });
-            },
-            setScrollTop: function (item) {
-                let content = $('#blog_content');
-                content.animate({scrollTop: `${item.offsetTop}px`});
-            },
-            onScroll: function (event) {
-                this.top = event.target.scrollTop;
-            },
-            edgeTop(el, bounding) {
-                let offsetTop = el.offsetTop;
-                let offsetParent = el.offsetParent;
-                while (offsetParent && (offsetParent !== bounding)) {
-                    offsetTop += offsetParent.offsetTop;
-                    offsetParent = offsetParent.offsetParent;
+            });
+        },
+        queryArticle: function () {
+            let id = this.$route.query.id || null;
+            this.$api.Article.queryArticle(id).then(data => {
+                if (!data) {
+                    this.$message({message: '文章不存在!'});
+                    this.$router.push({name: 'blog'});
+                    return;
                 }
-                return offsetTop;
-            }
+
+                document.title = data.title;
+
+                this.article = data;
+                this.$nextTick(function () {
+                    $('pre').addClass('line-numbers');
+                    Prism.highlightAll();
+
+                    this.setArticleNav();
+                });
+            });
         },
-        watch: {
-            $route: function () {
-                this.queryArticle();
-            }
+        setArticleNav: function () {
+            let children = $(this.$refs.content).children('h1, h2, h3, h4, h5, h6');
+            let content = document.getElementById('blog_content');
+            this.articleNav = [];
+            children.each((index, element) => {
+                let tagLevel = (/(?<=h)[0-9]/i.exec(element.tagName)) || [];
+                this.articleNav.push({text: $(element).text(), offsetTop: 0, level: tagLevel[0], el: element});
+            });
+
+            setTimeout(() => {
+                this.articleNav.forEach(item => {
+                    item.offsetTop = this.edgeTop(item.el, content);
+                });
+            }, 500);
         },
-        created: function () {
+        setScrollTop: function (item) {
+            let content = $('#blog_content');
+            content.animate({scrollTop: `${item.offsetTop}px`});
+        },
+        onScroll: function (event) {
+            this.top = event.target.scrollTop;
+        },
+        edgeTop(el, bounding) {
+            let offsetTop = el.offsetTop;
+            let offsetParent = el.offsetParent;
+            while (offsetParent && (offsetParent !== bounding)) {
+                offsetTop += offsetParent.offsetTop;
+                offsetParent = offsetParent.offsetParent;
+            }
+            return offsetTop;
+        },
+    },
+    watch: {
+        $route: function () {
             this.queryArticle();
-        },
-    };
+        }
+    },
+    created: function () {
+        this.queryArticle();
+    },
+};
 </script>
 
 <style lang="scss">
-    .page-wrap {
-        position: relative;
-        width: 100%;
-        display: flex;
-    }
+.page-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
 
-    .article-page-nav {
-        position: relative;
-        width: 240px;
-        min-width: 240px;
-        .page-nav {
-            position: fixed;
-            width: 190px;
-            max-height: 80vh;
-            margin-left: 30px;
+.article-page-nav {
+    position: relative;
+    width: 240px;
+    min-width: 240px;
+    .page-nav {
+        position: fixed;
+        width: 190px;
+        max-height: 80vh;
+        margin-left: 30px;
+        overflow: visible;
+        font-size: 14px;
+        cursor: default;
+        &-item {
+            white-space: nowrap;
             overflow: visible;
-            font-size: 14px;
-            cursor: default;
-            &-item {
-                white-space: nowrap;
-                overflow: visible;
-                &:hover {
-                    color: $color-primary;
-                }
+            &:hover {
+                color: $color-primary;
             }
         }
-        .v-timeline {
-            padding-top: 0;
-        }
-        .v-timeline-item {
-            padding-bottom: 8px;
-        }
-        .v-timeline--dense .v-timeline-item__body {
-            max-width: calc(100% - 40px);
-        }
     }
+    .v-timeline {
+        padding-top: 0;
+    }
+    .v-timeline-item {
+        padding-bottom: 8px;
+    }
+    .v-timeline--dense .v-timeline-item__body {
+        max-width: calc(100% - 40px);
+    }
+}
 
-    .article-page {
-        position: relative;
-        flex: 1;
-        overflow: hidden;
-        /*max-width: calc(100% - 240px);*/
-        &-title {
-            word-break: break-all;
-            font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.3;
-            max-width: 80%;
+.article-page {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    /*max-width: calc(100% - 240px);*/
+    &-title {
+        word-break: break-all;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.3;
+        max-width: 80%;
+    }
+    &-operators {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    &-article {
+        & * {
+            max-width: 100%;
         }
-        &-operators {
-            position: absolute;
-            right: 0;
-            top: 0;
+        @import "~@public/prism/prism.css";
+        font-size: 16px;
+        line-height: 1.7;
+        pre[class*="language-"] {
+            @include box-shadow;
         }
-        &-article {
-            & * {
-                max-width: 100%;
-            }
-            @import "~@public/prism/prism.css";
-            font-size: 16px;
-            line-height: 1.7;
-            pre[class*="language-"] {
-                @include box-shadow;
-            }
-            .toolbar-item {
-                cursor: pointer;
-                margin-left: 4px;
-            }
-            code, kbd {
-                font-size: inherit;
-                font-weight: inherit;
-                box-shadow: none;
-                background-color: inherit;
-            }
+        .toolbar-item {
+            cursor: pointer;
+            margin-left: 4px;
+        }
+        code, kbd {
+            font-size: inherit;
+            font-weight: inherit;
+            box-shadow: none;
+            background-color: inherit;
         }
     }
+}
 </style>
