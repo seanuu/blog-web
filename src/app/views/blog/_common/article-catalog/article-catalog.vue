@@ -7,32 +7,32 @@
 </template>
 
 <script>
-    import CatalogItem from './article-catalog-item.vue';
+import CatalogItem from './article-catalog-item.vue';
 
-    export default {
-        name: 'article-catalog',
-        components: {CatalogItem},
-        props: ['catalog'],
-        data: function () {
-            return {
-                top: 0
-            };
-        },
-        methods: {
-            onScroll: function (event) {
-                this.top = event.target.scrollTop;
-            }
+export default {
+    name: 'article-catalog',
+    components: {CatalogItem},
+    props: ['catalog'],
+    data: function() {
+        return {
+            top: 0
+        };
+    },
+    methods: {
+        onScroll: function(event) {
+            this.top = event.target.scrollTop;
         }
-    };
+    }
+};
 </script>
 
 <style lang="scss">
-    .article-catalog {
-        position: fixed;
-        width: 190px;
-        max-height: 80vh;
-        overflow: auto;
-        font-size: 14px;
-        cursor: default;
-    }
+.article-catalog {
+    position: fixed;
+    width: 190px;
+    max-height: 80vh;
+    overflow: auto;
+    font-size: 14px;
+    cursor: default;
+}
 </style>

@@ -10,15 +10,12 @@ module.exports = {
         tinymce: true,
         Prism: true
     },
-    'extends': [
-        'plugin:vue/essential',
-        'eslint:recommended'
-    ],
+    extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'semi': ['error', 'always'],
-        'quotes': ['error', 'single'],
+        semi: ['error', 'always'],
+        quotes: ['error', 'single'],
         'no-unused-vars': 'off',
         'no-unused-components': 'off'
     },

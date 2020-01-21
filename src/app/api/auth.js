@@ -1,6 +1,6 @@
 export const Auth = {
     // 登陆
-    login: function (user) {
+    login: function(user) {
         let url = '/user/login';
         return Axios.post(url, {
             username: user.username,
@@ -10,14 +10,14 @@ export const Auth = {
         });
     },
     // 登出
-    logout: function () {
+    logout: function() {
         let url = '/user/logout';
         return Axios.post(url).then(response => {
             return response.data.logout;
         });
     },
     // 注册
-    register: function (user) {
+    register: function(user) {
         let url = '/user/register';
         return Axios.post(url, {
             username: user.username,
@@ -28,20 +28,19 @@ export const Auth = {
         });
     },
     // 检查用户名是否存在
-    checkUsername: function (username) {
+    checkUsername: function(username) {
         let url = '/user/checkUsername';
         return Axios.post(url, {
-            username: username,
+            username: username
         }).then(response => {
             return response.data.exist;
         });
     },
     // 检查登陆状态
-    checkStatus: function () {
+    checkStatus: function() {
         let url = '/user/checkStatus';
         return Axios.post(url).then(response => {
             return response.data;
         });
     }
-
 };

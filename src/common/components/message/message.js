@@ -7,7 +7,7 @@ let instance;
 let instances = [];
 let seed = 1;
 
-const Message = function (options) {
+const Message = function(options) {
     options = options || {};
     const id = 'notification_' + seed++;
 

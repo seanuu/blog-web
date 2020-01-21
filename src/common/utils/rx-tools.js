@@ -21,12 +21,10 @@ export class DebounceTime {
     }
 
     subscribe(callback) {
-        this.subscription = this.subject.asObservable()
-            .pipe(
-                ...this.operators,
-                debounceTime(this.time)
-            )
-            .subscribe((arg) => {
+        this.subscription = this.subject
+            .asObservable()
+            .pipe(...this.operators, debounceTime(this.time))
+            .subscribe(arg => {
                 callback(arg);
             });
     }

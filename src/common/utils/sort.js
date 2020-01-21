@@ -1,11 +1,11 @@
-export function sort (root, compare) {
+export function sort(root, compare) {
     let node, nodes;
     let children, i;
 
     nodes = Array.isArray(root) ? root : [root];
 
     while ((node = nodes.pop())) {
-        (function (node) {
+        (function(node) {
             if (node.children) {
                 node.children.sort(compare);
             }

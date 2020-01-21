@@ -2,14 +2,22 @@
     <div class="page-wrap">
         <div class="article-page">
             <v-fab-transition>
-                <v-btn v-if="$store.state.login && $store.state.userId === article.userId" v-show="!hidden"
-                       class="hidden-sm-and-up" color="primary" fab small fixed right
-                       @click="goEdit">
+                <v-btn
+                    v-if="$store.state.login && $store.state.userId === article.userId"
+                    v-show="!hidden"
+                    class="hidden-sm-and-up"
+                    color="primary"
+                    fab
+                    small
+                    fixed
+                    right
+                    @click="goEdit"
+                >
                     <v-icon>fas fa-pen-nib</v-icon>
                 </v-btn>
             </v-fab-transition>
 
-            <div class="article-page-title">{{article.title}}</div>
+            <div class="article-page-title">{{ article.title }}</div>
             <div class="article-page-operators" v-if="$store.state.login && $store.state.userId === article.userId">
                 <v-btn class="hidden-xs-only" color="primary" small @click="goEdit">编辑</v-btn>
                 <v-btn class="hidden-xs-only" color="primary" dark small @click="deleteArticle">删除</v-btn>
@@ -21,8 +29,8 @@
         <div class="article-page-nav hidden-md-and-down">
             <v-timeline align-top dense class="page-nav" v-if="articleNav && articleNav.length > 0">
                 <v-timeline-item color="teal lighten-3" hide-dot small v-for="(item, i) in articleNav" :key="i">
-                    <div class="page-nav-item" @click="setScrollTop(item)"
-                         :style="{'text-indent': `${(item.level - 1) * 12}px`}">{{item.text}}
+                    <div class="page-nav-item" @click="setScrollTop(item)" :style="{'text-indent': `${(item.level - 1) * 12}px`}">
+                        {{ item.text }}
                     </div>
                 </v-timeline-item>
             </v-timeline>
@@ -36,23 +44,23 @@ import ArticleInfo from './article-info/article-info.vue';
 export default {
     name: 'article-page',
     components: {ArticleInfo},
-    data: function () {
+    data: function() {
         return {
             article: {},
             top: 0,
-            articleNav: [],
+            articleNav: []
         };
     },
     computed: {
-        hidden: function () {
+        hidden: function() {
             return this.top > 200;
         }
     },
     methods: {
-        goEdit: function () {
+        goEdit: function() {
             this.$router.push({name: 'edit', query: {id: this.$route.query.id}});
         },
-        deleteArticle: function () {
+        deleteArticle: function() {
             this.$prompt.send({title: '警告', message: `确认删除 ${this.article.title}！`}).then(data => {
                 if (!data) return;
 
@@ -63,7 +71,7 @@ export default {
                 });
             });
         },
-        queryArticle: function () {
+        queryArticle: function() {
             let id = this.$route.query.id || null;
             this.$api.Article.queryArticle(id).then(data => {
                 if (!data) {
@@ -75,7 +83,7 @@ export default {
                 document.title = data.title;
 
                 this.article = data;
-                this.$nextTick(function () {
+                this.$nextTick(function() {
                     $('pre').addClass('line-numbers');
                     Prism.highlightAll();
 
@@ -83,12 +91,12 @@ export default {
                 });
             });
         },
-        setArticleNav: function () {
+        setArticleNav: function() {
             let children = $(this.$refs.content).children('h1, h2, h3, h4, h5, h6');
             let content = document.getElementById('blog_content');
             this.articleNav = [];
             children.each((index, element) => {
-                let tagLevel = (/(?<=h)[0-9]/i.exec(element.tagName)) || [];
+                let tagLevel = /(?<=h)[0-9]/i.exec(element.tagName) || [];
                 this.articleNav.push({text: $(element).text(), offsetTop: 0, level: tagLevel[0], el: element});
             });
 
@@ -98,31 +106,31 @@ export default {
                 });
             }, 500);
         },
-        setScrollTop: function (item) {
+        setScrollTop: function(item) {
             let content = $('#blog_content');
             content.animate({scrollTop: `${item.offsetTop}px`});
         },
-        onScroll: function (event) {
+        onScroll: function(event) {
             this.top = event.target.scrollTop;
         },
         edgeTop(el, bounding) {
             let offsetTop = el.offsetTop;
             let offsetParent = el.offsetParent;
-            while (offsetParent && (offsetParent !== bounding)) {
+            while (offsetParent && offsetParent !== bounding) {
                 offsetTop += offsetParent.offsetTop;
                 offsetParent = offsetParent.offsetParent;
             }
             return offsetTop;
-        },
+        }
     },
     watch: {
-        $route: function () {
+        $route: function() {
             this.queryArticle();
         }
     },
-    created: function () {
+    created: function() {
         this.queryArticle();
-    },
+    }
 };
 </script>
 
@@ -185,17 +193,18 @@ export default {
         & * {
             max-width: 100%;
         }
-        @import "~@public/prism/prism.css";
+        @import '~@public/prism/prism.css';
         font-size: 16px;
         line-height: 1.7;
-        pre[class*="language-"] {
+        pre[class*='language-'] {
             @include box-shadow;
         }
         .toolbar-item {
             cursor: pointer;
             margin-left: 4px;
         }
-        code, kbd {
+        code,
+        kbd {
             font-size: inherit;
             font-weight: inherit;
             box-shadow: none;

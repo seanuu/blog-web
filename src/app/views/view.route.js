@@ -28,7 +28,7 @@ export default [
                         component: AuthorAbstract,
                         meta: {
                             title: '主页'
-                        },
+                        }
                     },
                     {
                         path: 'article',
@@ -42,9 +42,9 @@ export default [
                         meta: {
                             action: ['needLogin', 'checkUser']
                         }
-                    },
+                    }
                 ]
-            },
+            }
         ]
     },
     {

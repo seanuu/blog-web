@@ -4,7 +4,7 @@ import Message from './components/message/message';
 import Prompt from './components/prompt/prompt';
 
 export default {
-    install: (Vue) => {
+    install: Vue => {
         for (let name in Components) {
             Vue.component(Components[name]['name'], Components[name]);
         }

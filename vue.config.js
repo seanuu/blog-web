@@ -18,11 +18,13 @@ module.exports = {
     chainWebpack: config => {
         config.plugins.delete('prefetch');
         if (process.env.NODE_ENV === 'production') {
-            config.plugin('compression').use(CompressionWebpackPlugin, [{
-                test: /\.js$|\.css$/,
-                algorithm: 'gzip',
-                threshold: 0
-            }]);
+            config.plugin('compression').use(CompressionWebpackPlugin, [
+                {
+                    test: /\.js$|\.css$/,
+                    algorithm: 'gzip',
+                    threshold: 0
+                }
+            ]);
         }
     },
     devServer: {
@@ -33,15 +35,15 @@ module.exports = {
             alias: {
                 '@theme': path.resolve(__dirname, 'src/theme/_index.scss'),
                 '@assets': path.resolve(__dirname, 'src/assets'),
-                '@public': path.resolve(__dirname, 'public'),
-            },
+                '@public': path.resolve(__dirname, 'public')
+            }
         },
         plugins: [
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 Axios: 'axios',
-                Utils: path.resolve(__dirname, 'src/common/utils'),
+                Utils: path.resolve(__dirname, 'src/common/utils')
             })
         ]
-    },
+    }
 };

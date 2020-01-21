@@ -24,7 +24,6 @@ export default {
         {text: 'JavaScript', value: 'javascript'},
         {text: 'Java', value: 'java'},
         {text: 'JSON', value: 'json'},
-        {text: 'Sass', value: 'sass'},
-    ],
-
+        {text: 'Sass', value: 'sass'}
+    ]
 };

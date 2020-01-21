@@ -1,6 +1,6 @@
 export const Article = {
     // 保存
-    saveArticle: function (article) {
+    saveArticle: function(article) {
         let url = '/article/save';
         let body = Object.assign(article, {
             title: article.title || '未命名文章',
@@ -13,17 +13,17 @@ export const Article = {
     },
 
     // 删除文章
-    deleteArticle: function (id) {
+    deleteArticle: function(id) {
         let url = '/article/delete';
         return Axios.post(url, {
-            articleId: id,
+            articleId: id
         }).then(response => {
             return response.data.delete;
         });
     },
 
     // 查询文章内容
-    queryArticle: function (id) {
+    queryArticle: function(id) {
         let url = '/article/queryArticle';
         return Axios.post(url, {
             id: id
@@ -33,7 +33,7 @@ export const Article = {
     },
 
     // 查询文章目录
-    queryArticleCatalog: function (userId) {
+    queryArticleCatalog: function(userId) {
         let url = '/article/queryArticleCatalog';
         return Axios.post(url, {
             userId: userId
@@ -43,7 +43,7 @@ export const Article = {
     },
 
     // 查询分类信息
-    queryClassification: function () {
+    queryClassification: function() {
         let url = '/article/queryClassification';
         return Axios.post(url).then(response => {
             return response.data;
@@ -51,7 +51,7 @@ export const Article = {
     },
 
     // 查询列表
-    queryAbstractList: function (params) {
+    queryAbstractList: function(params) {
         let url = '/article/queryAbstractList';
         return Axios.post(url, {
             pageNum: params.pageNum || 1,
@@ -60,6 +60,5 @@ export const Article = {
         }).then(response => {
             return response.data;
         });
-    },
-
+    }
 };

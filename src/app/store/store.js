@@ -10,12 +10,12 @@ export default new Vuex.Store({
         userId: null
     },
     mutations: {
-        signIn: function (state, {username, userId}) {
+        signIn: function(state, {username, userId}) {
             state.login = true;
             state.username = username;
             state.userId = userId;
         },
-        signOut: function (state) {
+        signOut: function(state) {
             state.login = false;
         }
     },

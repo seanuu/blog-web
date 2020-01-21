@@ -13,6 +13,7 @@
     "classlist.js": "^1.1.20150312",
     "d3": "^5.8.0",
     "jquery": "^3.3.1",
+    "medium-zoom": "^1.0.5",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.15.0",
     "resize-observer-polyfill": "^1.5.1",
@@ -30,12 +31,15 @@
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.0.1",
     "compression-webpack-plugin": "^2.0.0",
     "eslint": "^5.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-vue": "^5.0.0",
     "http-server": "^0.11.1",
     "node-sass": "^4.9.0",
+    "prettier": "^1.19.1",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.21"
   }

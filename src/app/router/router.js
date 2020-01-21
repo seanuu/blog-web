@@ -13,5 +13,4 @@ const router = new Router({
 
 Intercept(router);
 
-
 export default router;

@@ -3,7 +3,7 @@ import Component from './prompt.vue';
 
 const PromptConstructor = Vue.extend(Component);
 
-const Prompt = function (options) {
+const Prompt = function(options) {
     options = options || {};
 
     this.instance = new PromptConstructor({
@@ -19,9 +19,8 @@ const Prompt = function (options) {
 };
 
 Prompt.prototype = {
-    send: function ({title = '提示', message = '确认执行操作！'}) {
+    send: function({title = '提示', message = '确认执行操作！'}) {
         return new Promise((resolve, reject) => {
-
             this.instance.title = title;
             this.instance.message = message;
 
