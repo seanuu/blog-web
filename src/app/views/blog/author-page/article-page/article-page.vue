@@ -40,6 +40,7 @@
 
 <script>
 import ArticleInfo from './article-info/article-info.vue';
+import mediumZoom from 'medium-zoom';
 
 export default {
     name: 'article-page',
@@ -88,11 +89,12 @@ export default {
                     Prism.highlightAll();
 
                     this.setArticleNav();
+                    this.mediumZoomImgs();
                 });
             });
         },
         setArticleNav: function() {
-            let children = $(this.$refs.content).children('h1, h2, h3, h4, h5, h6');
+            let children = $(this.$refs.content).find('h1, h2, h3, h4, h5, h6');
             let content = document.getElementById('blog_content');
             this.articleNav = [];
             children.each((index, element) => {
@@ -121,6 +123,18 @@ export default {
                 offsetParent = offsetParent.offsetParent;
             }
             return offsetTop;
+        },
+        mediumZoomImgs() {
+            let imgs = $(this.$refs.content).find('img');
+            let elems = [];
+            imgs.each((index, element) => {
+                elems.push(element);
+            });
+            let zoom = mediumZoom(elems);
+
+            this.$on('hook:beforeDestroy', () => {
+                zoom.detach();
+            });
         }
     },
     watch: {
