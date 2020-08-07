@@ -15,7 +15,7 @@
     "jquery": "^3.3.1",
     "medium-zoom": "^1.0.5",
     "normalize.css": "^8.0.1",
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.21.0",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.4.0",
     "vue": "^2.5.21",
