@@ -7,7 +7,7 @@ export class DebounceTime {
         this.subject = new Subject();
         this.subscription = null;
 
-        this.operators = null;
+        this.operators = [];
     }
 
     next(arg) {

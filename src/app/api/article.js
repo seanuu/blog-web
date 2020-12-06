@@ -60,5 +60,15 @@ export const Article = {
         }).then(response => {
             return response.data;
         });
+    },
+
+    search: function(params) {
+        let url = '/article/search';
+
+        return Axios.post(url, {
+            search: params.search || ''
+        }).then(response => {
+            return response.data;
+        });
     }
 };
