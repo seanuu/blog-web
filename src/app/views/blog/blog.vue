@@ -4,7 +4,7 @@
             <div class="blog-toolbar-content">
                 <v-spacer class="hidden-sm-and-down"></v-spacer>
 
-                <v-menu offset-y light v-if="hasSignIn">
+                <v-menu offset-y light>
                     <v-text-field
                         clearable
                         slot="activator"
