@@ -16,8 +16,15 @@
                     <v-list v-show="searchList.length" style="max-height: 70vh; overflow: auto; max-width: 90vw">
                         <template v-for="(item, i) in searchList">
                             <v-list-tile :key="i" ripple @click="goArticlePage(item)" class="search-list">
-                                <v-list-tile-content class="py-1">
-                                    <v-list-tile-title class="font-weight-bold">{{ item.title }}</v-list-tile-title>
+                                <v-list-tile-content class="py-1" style="width: 100%">
+                                    <v-list-tile-title class="font-weight-bold">
+                                        <span>{{ item.title }}</span>
+                                        <v-list-tile-sub-title style="text-align: right;" class="d-inline">
+                                            <v-icon class="mr-1 ml-3" color="grey darken-3">fas fa-tags</v-icon>
+                                            {{ item.classification }}
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-title>
+
                                     <div v-if="!item.content.length" class="pt-2"></div>
 
                                     <template v-for="(content, ic) in item.content">
@@ -30,10 +37,6 @@
                                 </v-list-tile-content>
 
                                 <v-spacer style="min-width: 20px"></v-spacer>
-
-                                <v-list-tile-content class="grow">
-                                    <v-list-tile-title style="text-align: right">{{ item.classification }}</v-list-tile-title>
-                                </v-list-tile-content>
                             </v-list-tile>
                         </template>
                     </v-list>
