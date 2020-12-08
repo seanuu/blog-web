@@ -18,10 +18,10 @@
                             <v-list-tile :key="i" ripple @click="goArticlePage(item)" class="search-list">
                                 <v-list-tile-content class="py-1" style="width: 100%">
                                     <v-list-tile-title class="font-weight-bold">
-                                        <span>{{ item.title }}</span>
+                                        <span v-html="item.title.join()"></span>
                                         <v-list-tile-sub-title style="text-align: right;" class="d-inline">
                                             <v-icon class="mr-1 ml-3" color="grey darken-3">fas fa-tags</v-icon>
-                                            {{ item.classification }}
+                                            <span v-html="item.classification.join()"></span>
                                         </v-list-tile-sub-title>
                                     </v-list-tile-title>
 
