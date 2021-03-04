@@ -17,6 +17,8 @@
         <textarea ref="editor"></textarea>
 
         <v-btn class="content-edit-commit" color="primary" small @click="save">提交</v-btn>
+
+        <v-switch color="orange darken-3" inset class="ml-3" v-model="article.private" value="1" label="私密"></v-switch>
     </div>
 </template>
 
@@ -33,7 +35,8 @@ export default {
             article: {
                 title: '',
                 classification: '',
-                content: ''
+                content: '',
+                private: '1'
             },
 
             headOffsetTop: null,
@@ -45,6 +48,7 @@ export default {
         save: function() {
             this.article.content = this.editor.getContent();
             this.article.userId = this.$store.state.userId;
+            this.article.private = this.article.private || '0';
 
             this.$api.Article.saveArticle(this.article).then(data => {
                 if (data.id) {
@@ -65,6 +69,7 @@ export default {
                 if (data.userId !== this.$store.state.userId) {
                     this.$router.push({name: 'blog'});
                 }
+                data.private = data.private === undefined ? '0' : data.private;
 
                 this.article = data;
                 setTimeout(() => {
