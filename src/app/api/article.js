@@ -12,6 +12,15 @@ export const Article = {
         });
     },
 
+    // 更新文章
+    updateArticle: function(id, article) {
+        let url = '/article/save';
+        let body = Object.assign(article, {_id: id});
+        return Axios.post(url, body).then(response => {
+            return response.data;
+        });
+    },
+
     // 删除文章
     deleteArticle: function(id) {
         let url = '/article/delete';

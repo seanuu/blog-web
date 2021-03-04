@@ -19,6 +19,15 @@
 
             <div class="article-page-title">{{ article.title }}</div>
             <div class="article-page-operators" v-if="$store.state.login && $store.state.userId === article.userId">
+                <v-switch
+                    color="orange darken-3"
+                    inset
+                    class="ml-3"
+                    v-model="article.private"
+                    value="1"
+                    label="私密"
+                    @change="changePrivateState"
+                ></v-switch>
                 <v-btn class="hidden-xs-only" color="primary" small @click="goEdit">编辑</v-btn>
                 <v-btn class="hidden-xs-only" color="primary" dark small @click="deleteArticle">删除</v-btn>
             </div>
@@ -135,6 +144,9 @@ export default {
             this.$on('hook:beforeDestroy', () => {
                 zoom.detach();
             });
+        },
+        changePrivateState() {
+            this.$api.Article.updateArticle(this.article._id, {private: this.article.private || '0'});
         }
     },
     watch: {
