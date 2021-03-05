@@ -7,7 +7,7 @@
             <span>{{ item.classification }}</span>
         </div>
 
-        <div class="item-title">{{ item.title }}</div>
+        <div :class="`item-title ${item.private === '1' ? 'red--text text--darken-2' : ''}`">{{ item.title }}</div>
 
         <div class="item-content">
             <v-layout>
